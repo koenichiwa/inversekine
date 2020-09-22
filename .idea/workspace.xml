@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1e9ba950-d0db-4f7e-adf5-b73460a645f4" name="Default Changelist" comment="" />
+    <list default="true" id="1e9ba950-d0db-4f7e-adf5-b73460a645f4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test_ArmSegment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/invkin.py" beforeDir="false" afterPath="$PROJECT_DIR$/invkin.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +20,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1hBM9hjnEvfNyCCl53gK0F85RxD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,9 +32,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.invkin">
     <configuration name="invkin" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="InverserKinematicaPy" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -46,9 +56,54 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests for test_ArmSegment.TestArmSegment.test_calc_actual_angle" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="InverserKinematicaPy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_ArmSegment.TestArmSegment.test_calc_actual_angle&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_ArmSegment.TestArmSegment.test_calc_endpoint" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="InverserKinematicaPy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_ArmSegment.TestArmSegment.test_calc_endpoint&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests in test_ArmSegment.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="InverserKinematicaPy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test_ArmSegment.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.invkin" />
+        <item itemvalue="Python tests.Unittests in test_ArmSegment.py" />
+        <item itemvalue="Python tests.Unittests for test_ArmSegment.TestArmSegment.test_calc_endpoint" />
+        <item itemvalue="Python tests.Unittests for test_ArmSegment.TestArmSegment.test_calc_actual_angle" />
       </list>
     </recent_temporary>
   </component>
@@ -78,53 +133,92 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="320" y="95" key="#Inspections" timestamp="1600339121735">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state x="320" y="95" key="#Inspections/0.23.1440.812@0.23.1440.812" timestamp="1600339121735" />
+    <state x="100" y="123" width="1240" height="612" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1600723746556">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state x="100" y="123" width="1240" height="612" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.23.1440.812@0.23.1440.812" timestamp="1600723746556" />
+    <state x="425" y="239" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1600335285998">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state x="425" y="239" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.812@0.23.1440.812" timestamp="1600335285998" />
     <state x="408" y="171" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1599562689402">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
     <state x="408" y="171" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1440.812@0.23.1440.812" timestamp="1599562689402" />
-    <state width="1419" height="259" key="GridCell.Tab.0.bottom" timestamp="1600118227059">
+    <state width="775" height="466" key="DebuggerActiveHint" timestamp="1600712876276">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1419" height="259" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1600118227059" />
-    <state width="1419" height="259" key="GridCell.Tab.0.center" timestamp="1600118227058">
+    <state width="775" height="466" key="DebuggerActiveHint/0.23.1440.812@0.23.1440.812" timestamp="1600712876276" />
+    <state width="886" height="207" key="GridCell.Tab.0.bottom" timestamp="1600773276550">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1419" height="259" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1600118227058" />
-    <state width="1419" height="259" key="GridCell.Tab.0.left" timestamp="1600118227058">
+    <state width="886" height="207" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1600773276550" />
+    <state width="886" height="207" key="GridCell.Tab.0.center" timestamp="1600773276549">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1419" height="259" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1600118227058" />
-    <state width="1419" height="259" key="GridCell.Tab.0.right" timestamp="1600118227059">
+    <state width="886" height="207" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1600773276549" />
+    <state width="886" height="207" key="GridCell.Tab.0.left" timestamp="1600773276549">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1419" height="259" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1600118227059" />
-    <state width="1419" height="259" key="GridCell.Tab.1.bottom" timestamp="1600118227060">
+    <state width="886" height="207" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1600773276549" />
+    <state width="886" height="207" key="GridCell.Tab.0.right" timestamp="1600773276549">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1419" height="259" key="GridCell.Tab.1.bottom/0.23.1440.812@0.23.1440.812" timestamp="1600118227060" />
-    <state width="1419" height="259" key="GridCell.Tab.1.center" timestamp="1600118227060">
+    <state width="886" height="207" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1600773276549" />
+    <state width="1046" height="259" key="GridCell.Tab.1.bottom" timestamp="1600723647817">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1419" height="259" key="GridCell.Tab.1.center/0.23.1440.812@0.23.1440.812" timestamp="1600118227059" />
-    <state width="1419" height="259" key="GridCell.Tab.1.left" timestamp="1600118227059">
+    <state width="1046" height="259" key="GridCell.Tab.1.bottom/0.23.1440.812@0.23.1440.812" timestamp="1600723647817" />
+    <state width="1046" height="259" key="GridCell.Tab.1.center" timestamp="1600723647816">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1419" height="259" key="GridCell.Tab.1.left/0.23.1440.812@0.23.1440.812" timestamp="1600118227059" />
-    <state width="1419" height="259" key="GridCell.Tab.1.right" timestamp="1600118227060">
+    <state width="1046" height="259" key="GridCell.Tab.1.center/0.23.1440.812@0.23.1440.812" timestamp="1600723647816" />
+    <state width="1046" height="259" key="GridCell.Tab.1.left" timestamp="1600723647816">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1419" height="259" key="GridCell.Tab.1.right/0.23.1440.812@0.23.1440.812" timestamp="1600118227060" />
-    <state x="221" y="68" key="SettingsEditor" timestamp="1599562840399">
+    <state width="1046" height="259" key="GridCell.Tab.1.left/0.23.1440.812@0.23.1440.812" timestamp="1600723647816" />
+    <state width="1046" height="259" key="GridCell.Tab.1.right" timestamp="1600723647817">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state x="221" y="68" key="SettingsEditor/0.23.1440.812@0.23.1440.812" timestamp="1599562840399" />
-    <state x="397" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1600255509896">
+    <state width="1046" height="259" key="GridCell.Tab.1.right/0.23.1440.812@0.23.1440.812" timestamp="1600723647817" />
+    <state x="221" y="68" key="SettingsEditor" timestamp="1600774827149">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state x="397" y="262" key="com.intellij.ide.util.TipDialog/0.23.1440.812@0.23.1440.812" timestamp="1600255509896" />
+    <state x="221" y="68" key="SettingsEditor/0.23.1440.812@0.23.1440.812" timestamp="1600774827149" />
+    <state width="720" height="406" key="XDebugger.FullValuePopup" timestamp="1600716803996">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state width="720" height="406" key="XDebugger.FullValuePopup/0.23.1440.812@0.23.1440.812" timestamp="1600716803996" />
+    <state x="397" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1600678653214">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state x="397" y="262" key="com.intellij.ide.util.TipDialog/0.23.1440.812@0.23.1440.812" timestamp="1600678653214" />
     <state x="385" y="159" key="search.everywhere.popup" timestamp="1599484144542">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
     <state x="385" y="159" key="search.everywhere.popup/0.23.1440.812@0.23.1440.812" timestamp="1599484144542" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="tests">
+        <watch expression="f.calc_endpoint()" language="Python" />
+      </configuration>
+      <configuration name="PythonConfigurationType">
+        <watch expression="np.linalg.norm(np.subtract(current_arm.calc_endpoint(), current_arm.parent.calc_endpoint()))" language="Python" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
