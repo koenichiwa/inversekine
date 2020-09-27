@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-import operator
 from tkinter import Tk, Canvas
-from typing import Optional, Union, Tuple, Generator, List, Iterable
+from typing import Optional, Union, Tuple, Generator, Iterable, Sequence
 from time import sleep
-from math import sin, cos, acos, radians, degrees, sqrt  # sqrt is only used in assertion proving linalg.norm is useful
+from math import sin, cos, acos, radians, degrees
 from numpy import subtract, linalg, dot, cross, append, add
 from functools import reduce
-
+from itertools import islice, cycle, count, chain
 
 SCALE = 10
 WIDTH = 900
@@ -38,26 +37,40 @@ class ArmSegment:
         self.length = length
         self.parent = parent
         self.limit = min(limit, 180)
-        self.angle = 0
+        self.__angle = 0
         self.set_angle(angle)
 
+    def __str__(self):
+        string = ""
+        for segment, depth in zip(chain(self.get_arm(), [None]), count(1)):
+            if segment is not None:
+                string += "(Angle: {}, Angle limit: {}, Length {}: Position: {}, Parent: \n"\
+                    .format(self.__angle, self.limit, self.length, self.calc_endpoint())
+                string += "\t" * depth
+            else:
+                string += "None" + (")" * (depth-1))
+        return string
+
     def calc_endpoint(self) -> Tuple[float, float]:
-        def endpoint_to_parent():
-            actual_angle = self.calc_actual_angle()
-            dx = self.length * sin(radians(actual_angle))
-            dy = self.length * cos(radians(actual_angle))
+        def endpoint_to_parent(segment: ArmSegment):
+            actual_angle = segment.calc_actual_angle()
+            dx = segment.length * sin(radians(actual_angle))
+            dy = segment.length * cos(radians(actual_angle))
             return dx, dy
         return reduce(add, map(endpoint_to_parent, self.get_arm()))
 
     def calc_actual_angle(self) -> float:
-        return sum(map(lambda segment: segment.angle, self.get_arm())) % 360
+        return sum(segment.get_angle() for segment in self.get_arm()) % 360
 
     def set_angle(self, new_angle: float):
         new_angle = new_angle % 360
         if new_angle < 180:
-            self.angle = min(new_angle, self.limit)
+            self.__angle = min(new_angle, self.limit)
         else:
-            self.angle = max(new_angle, 360 - self.limit)
+            self.__angle = max(new_angle, 360 - self.limit)
+
+    def get_angle(self) -> float:
+        return self.__angle
 
     def get_arm(self) -> Generator[ArmSegment]:
         yield self
@@ -66,10 +79,8 @@ class ArmSegment:
 
 
 def damping(angle: float, damping_scale: float) -> float:
-    if damping_scale < 1:
-        return angle
     abs_angle = abs(angle)
-    if abs_angle > 90:
+    if abs_angle > 90 and damping_scale > 1:
         return angle / damping_scale
     elif abs_angle > 45 and damping_scale > 2:
         return angle / (damping_scale / 2)
@@ -83,43 +94,31 @@ def damping(angle: float, damping_scale: float) -> float:
 
 def inverse_kine(
         goal: Tuple[float, float],
-        last_arm: ArmSegment,
+        arm: Sequence[ArmSegment],
         damping_scale: float,
         max_steps: int,
-        max_error: float,
-        _current_arm: Optional[ArmSegment] = None,
-        _step_count: int = 0
-) -> Generator[Generator[ArmSegment]]:
-    if _current_arm is None:
-        _current_arm = last_arm
-    if _step_count < max_steps and linalg.norm(subtract(last_arm.calc_endpoint(), goal)) > max_error:
-        parent_base = (0, 0) if _current_arm.parent is None else _current_arm.parent.calc_endpoint()
+        max_error: float
+) -> Generator[None]:
+    for segment in islice(cycle(arm), max_steps):
+        if linalg.norm(subtract(arm[0].calc_endpoint(), goal)) < max_error:
+            break
 
-        # endpoints relative to parent base
-        endpoint_a = subtract(last_arm.calc_endpoint(), parent_base)
+        parent_base = (0, 0) if segment.parent is None else segment.parent.calc_endpoint()
+        endpoint_a = subtract(arm[0].calc_endpoint(), parent_base)
         endpoint_g = subtract(goal, parent_base)
 
-        # normalized vectors
         vec_a = endpoint_a / linalg.norm(endpoint_a)
         vec_g = endpoint_g / linalg.norm(endpoint_g)
-        # NB: when a vector is given to np.linalg.norm (and no other arguments are passed) it will return the L2 norm,
-        # or Euclidean length. Dividing the fields in the vector by this value will give you the normalized vector
-        # It's generally equivalent to the pythagorean formula sqrt(x**2 + y**2):
-        assert linalg.norm(endpoint_a) == sqrt(endpoint_a[0] ** 2 + endpoint_a[1] ** 2)
 
-        # angles
         angle_diff = degrees(acos(dot(vec_a, vec_g)))
-        print("Step:", MAX_STEPS - _step_count, "Current angle:", _current_arm.angle,
-              "Angle difference:", angle_diff, "(Damped:", damping(angle_diff, damping_scale), ")"
-              "\"Hand\" position", last_arm.calc_endpoint(), "Goal position", goal)
 
-        sign = 1 if cross(append(vec_a, 0.0), append(vec_g, 0.0))[2] > 0 else -1
+        sign = -1 if cross(append(vec_a, 0.0), append(vec_g, 0.0))[2] > 0 else 1
 
-        # rotate
-        _current_arm.set_angle((_current_arm.angle - sign * damping(angle_diff, damping_scale)) % 360)
-        yield last_arm.get_arm()
-        yield from inverse_kine(goal, last_arm, damping_scale, max_steps, max_error, _current_arm.parent,
-                                _step_count + 1)
+        segment.set_angle((segment.get_angle() + sign * damping(angle_diff, damping_scale)))
+        print("Current segment:\n", segment,
+              "\nAngle difference:", angle_diff, "(Damped:", damping(angle_diff, damping_scale), ")"
+              "\n\"Hand\" position", arm[0].calc_endpoint(), "Goal position", goal)
+        yield
 
 
 # -------- GUI --------
@@ -130,23 +129,23 @@ class ArmCanvas(Canvas):
         self.width = width
         self.height = height
         self.draw_scale = scale
-        self.master.title("Inverse Kinematica")
         self.line_lib = {}
 
     def run(
             self,
-            last_segment: ArmSegment,
+            arm: Iterable[ArmSegment],
             goal: Tuple[float, float],
             damping_scale: float,
             step_time: float,
             max_error: float,
             max_steps: int
     ):
-        self.__add_arm(last_segment.get_arm())
+        arm = list(arm)
+        self.__add_arm(arm)
         self.__draw_goal(goal)
         super().update()
         sleep(step_time)
-        for arm in inverse_kine(goal, last_segment, damping_scale, max_steps, max_error):
+        for _ in inverse_kine(goal, arm, damping_scale, max_steps, max_error):
             self.__update_arm(arm)
             super().update()
             sleep(step_time)
@@ -188,6 +187,7 @@ class ArmCanvas(Canvas):
 
 # -------- MAIN --------
 def main():
+    arm = []
     segment_count = int(input("How many segments? "))
     total_length = 0
     current_segment = None
@@ -199,6 +199,7 @@ def main():
         limit = float(input("Limit in angle from 0 degrees? (Max 180) "))
 
         current_segment = ArmSegment(length, angle, current_segment, limit)
+        arm = [current_segment] + arm
 
     x = float(input("Goal x? "))
     y = float(input("Goal y? "))
@@ -209,12 +210,14 @@ def main():
 
     # Can prompt for other variables here (but opted to save them as constants)
 
-    root = Tk()
-    arm_canvas = ArmCanvas(root, WIDTH, HEIGHT, SCALE)
-    arm_canvas.pack()
-    arm_canvas.run(current_segment, (x, y), damping_scale, STEP_TIME, MAX_ERROR, MAX_STEPS)
+    tk = Tk()
+    tk.title("Inverse Kinematica")
 
-    root.mainloop()
+    arm_canvas = ArmCanvas(tk, WIDTH, HEIGHT, SCALE)
+    arm_canvas.pack()
+    arm_canvas.run(arm, (x, y), damping_scale, STEP_TIME, MAX_ERROR, MAX_STEPS)
+
+    tk.mainloop()
 
 
 if __name__ == '__main__':

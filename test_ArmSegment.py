@@ -10,23 +10,27 @@ class TestArmSegment(TestCase):
         for first, second in zip(first_tuple, second_tuple):
             self.assertAlmostEqual(first, second, places, msg, delta)
 
+    def assertEqualTuple(self, first_tuple: tuple, second_tuple: tuple, msg: Any = None) -> None:
+        for first, second in zip(first_tuple, second_tuple):
+            self.assertEqual(first, second, msg)
+
     def test_calc_endpoint(self):
         # First arm
         a = ArmSegment(1, 0)
-        self.assertEqual((0, 1), a.calc_endpoint())
+        self.assertEqualTuple((0, 1), a.calc_endpoint())
 
         # Child arm of same length
         b = ArmSegment(1, 0, a)
-        self.assertEqual((0, 2), b.calc_endpoint())
+        self.assertEqualTuple((0, 2), b.calc_endpoint())
         # Child of child of same length
         c = ArmSegment(1, 0, b)
-        self.assertEqual((0, 3), c.calc_endpoint())
+        self.assertEqualTuple((0, 3), c.calc_endpoint())
 
         del b, c
 
         # Child arm of base double lenght
         d = ArmSegment(2, 0, a)
-        self.assertEqual((0, 3), d.calc_endpoint())
+        self.assertEqualTuple((0, 3), d.calc_endpoint())
 
         del d
 
@@ -59,6 +63,24 @@ class TestArmSegment(TestCase):
         self.assertEqual(e.calc_actual_angle(), 1)
         f = ArmSegment(1, 180.1, c)
         self.assertAlmostEqual(f.calc_actual_angle(), 0.1)
+
+    def test_set_angle(self):
+        a = ArmSegment(1, 0)
+        self.assertEqual(a.get_angle(), 0)
+        a.set_angle(10)
+        self.assertEqual(a.get_angle(), 10)
+        a.set_angle(370)
+        self.assertEqual(a.get_angle(), 10)
+        a.set_angle(-350)
+        self.assertEqual(a.get_angle(), 10)
+
+    def test_get_arm(self):
+        a = ArmSegment(1, 0)
+        b = ArmSegment(1, 0, a)
+        c = ArmSegment(1, 0, b)
+        self.assertListEqual(list(a.get_arm()), [a])
+        self.assertListEqual(list(b.get_arm()), [b, a])
+        self.assertListEqual(list(c.get_arm()), [c, b, a])
 
 
 if __name__ == '__main__':
